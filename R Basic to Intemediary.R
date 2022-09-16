@@ -130,3 +130,287 @@ da2> da5
 # instruction
 
 # Use the function data.frame() to construct a data frame. Pass the vectors name, type, diameter, rotation and rings as arguments to data.frame(), in this order. Call the resulting data frame planets_df.
+# Definition of vectors
+name <- c("Mercury", "Venus", "Earth",
+          "Mars", "Jupiter", "Saturn",
+          "Uranus", "Neptune")
+type <- c("Terrestrial planet",
+          "Terrestrial planet",
+          "Terrestrial planet",
+          "Terrestrial planet", "Gas giant",
+          "Gas giant", "Gas giant", "Gas giant")
+diameter <- c(0.382, 0.949, 1, 0.532,
+              11.209, 9.449, 4.007, 3.883)
+rotation <- c(58.64, -243.02, 1, 1.03,
+              0.41, 0.43, -0.72, 0.67)
+rings <- c(FALSE, FALSE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE)
+
+# Create a data frame from the vectors
+planets_df <- data.frame(name,type,diameter,rotation, rings)
+planets_df
+#__________________________
+
+# Only planets with rings but shorter
+#
+# So what exactly did you learn in the previous exercises? You selected a subset from a data frame (planets_df) based on whether or not a certain condition was true (rings or no rings), and you managed to pull out all relevant data. Pretty awesome! By now, NASA is probably already flirting with your CV ;-).
+# Now, let us move up one level and use the function subset(). You should see the subset() function as a short-cut to do exactly the same as what you did in the previous exercises.
+
+#subset(my_df, subset = some_condition)
+
+# The first argument of subset() specifies the dataset for which you want a subset.
+# By adding the second argument, you give R the necessary information and conditions to select the correct subset.
+# The code below will give the exact same result as you got in the previous exercise,
+# but this time, you didn't need the rings_vector!
+
+subset(planets_df, subset = rings)
+
+# instructions
+#
+# Use subset() on planets_df to select planets that have a diameter smaller than Earth.
+# Because the diameter variable is a relative measure of the
+# planet's diameter w.r.t that of planet Earth, your condition is diameter < 1.
+#
+# # Select planets with diameter < 1
+subset(planets_df, subset = diameter <1)
+
+#Sorting
+
+# Making and creating rankings is one of mankind's favorite affairs. These rankings can be useful (best universities
+# in the world), entertaining (most influential movie stars) or pointless (best 007 look-a-like).
+# In data analysis you can sort your data according to a certain variable in the dataset. In R, this is done with the
+# help of the function order().
+# order() is a function that gives you the ranked position of each element when it is applied on a variable, such as a
+#  vector for example:
+
+a <- c(100, 10, 1000)
+order(a)
+
+
+# 10, which is the second element in a, is the smallest element, so 2 comes first in the output of order(a). 100, which
+# is the first element in a is the second smallest element, so 1 comes second in the output of order(a).
+# This means we can use the output of order(a) to reshuffle a:
+
+a[order(a)]
+
+
+# Sorting your data frame
+#
+# Alright, now that you understand the order() function, let us do something useful with it. You would like to rearrange
+# your data frame such that it starts with the smallest planet and ends with the largest one. A sort on the diameter column.
+#
+# instructions
+#
+# - Call order() on planets_df$diameter (the diameter column of planets_df). Store the result as positions.
+# - Now reshuffle planets_df with the positions vector as row indexes inside square brackets. Keep all columns.
+# Simply print out the result.
+# Dica: Use planets_df[positions, ] to sort planets_df; the comma inside the square brackets is crucial!
+
+# planets_df is pre-loaded in your workspace
+# Use order() to create positions
+positions <-  order(planets_df$diameter)
+positions
+# Use positions to sort planets_df
+
+planets_df[positions, ]
+
+# - Vectors (one dimensional array): can hold numeric, character or logical values. The elements in a vector all have the same data type.
+# - Matrices (two dimensional array): can hold numeric, character or logical values. The elements in a matrix all have the same data type.
+# - Data frames (two-dimensional objects): can hold numeric, character or logical values. Within a column all elements have the same data type,
+# but different columns can be of different data type.
+
+# Creating a named list
+
+# Well done, you're on a roll!
+# Just like on your to-do list, you want to avoid not knowing or remembering what the components of your list stand for.
+# That is why you should give names to them:
+
+your_comp1 <- "Dell"
+your_comp2 <- "Apple"
+
+
+my_list <- list(name1 = your_comp1,
+                name2 = your_comp2)
+my_list
+
+# This creates a list with components that are named name1, name2, and so on. If you want to name your lists after you've
+# created them, you can use the names() function as you did with vectors. The following commands are fully equivalent to
+#  the assignment above:
+
+my_list <- list(your_comp1, your_comp2)
+
+names(my_list) <- c("name1", "name2")
+my_list
+
+
+# Change the code of the previous exercise (see editor) by adding names to the components. Use for my_vector the
+# name vec, for my_matrix the name mat and for my_df the name df.
+
+# Vector with numerics from 1 up to 10
+my_vector <- 1:10
+# Matrix with numerics from 1 up to 9
+my_matrix <- matrix(1:9, ncol = 3)
+# First 10 elements of the built-in data frame mtcars
+my_df <- mtcars[1:10,]
+# Adapt list() call to give the components names
+my_list <- list(vec = my_vector, mat = my_matrix, df = my_df)
+# Print out my_list
+my_list
+
+#__________
+
+# R intermediary
+#
+# Customize further: else if
+# The else if statement allows you to further customize your control structure. You can add as many else if statements as
+# you like. Keep in mind that R ignores the remainder of the control structure once a condition has been found that is TRUE
+# and the corresponding expressions have been executed. Here's an overview of the syntax to freshen your memory:
+
+# if (condition1) {
+#   expr1
+# } else if (condition2) {
+#   expr2
+# } else if (condition3) {
+#   expr3
+# } else {
+#   expr4
+# }
+# Again, It's important that the else if keywords comes on the same line as the closing bracket of the previous part of
+# the control construct!
+
+# Variables related to your last day of recordings
+medium <- "LinkedIn"
+num_views <- 14
+
+# Control structure for medium
+if (medium == "LinkedIn") {
+  print("Showing LinkedIn information")
+} else if (medium == "Facebook") {
+  # Add code to print correct string when condition is TRUE
+  print("Showing Facebook information")
+} else {
+  print("Unknown medium")
+}
+
+# Control structure for num_views
+if (num_views > 15) {
+  print("You're popular!")
+} else if (num_views <= 15 & num_views > 10) {
+  # Add code to print correct string when condition is TRUE
+  print("Your number of views is average")
+} else {
+  print("Try to be more visible!")
+}
+# Exercício
+# Take control!
+# In this exercise, you will combine everything that you've learned so far: relational operators, logical operators and
+# control constructs. You'll need it all!
+#
+# We've pre-defined two values for you: li and fb, denoting the number of profile views your LinkedIn and Facebook profile
+# had on the last day of recordings. Go through the instructions to create R code that generates a 'social media score',
+# sms, based on the values of li and fb.
+#
+# Instructions
+# 0 XP
+# Finish the control-flow construct with the following behavior:
+#
+# If both li and fb are 15 or higher, set sms equal to double the sum of li and fb.
+# If both li and fb are strictly below 10, set sms equal to half the sum of li and fb.
+# In all other cases, set sms equal to li + fb.
+# Finally, print the resulting sms variable.
+
+
+# Variables related to your last day of recordings
+li <- 15
+fb <- 9
+
+# Code the control-flow construct
+if (li >= 15 & fb >= 15) {
+  sms <- 2 * (li + fb)
+} else if (li < 10 & fb < 10) {
+  sms <- 0.5 * (li + fb)
+} else {
+  sms <- li + fb
+}
+
+# Print the resulting sms to the console
+sms
+
+#____
+# While Loops
+
+# Throw in more conditionals
+# In the previous exercise, you simulated the interaction between a driver and a driver's assistant: When the speed
+# was too high, "Slow down!" got printed out to the console, resulting in a decrease of your speed by 7 units.
+#
+# There are several ways in which you could make your driver's assistant more advanced. For example, the assistant
+# could give you different messages based on your speed or provide you with a current speed at a given moment.
+#
+# A while loop similar to the one you've coded in the previous exercise is already available for you to use.
+# It prints out your current speed, but there's no code that decreases the speed variable yet, which is pretty dangerous.
+# Can you make the appropriate changes?
+
+# If the speed is greater than 48, have R print out "Slow down big time!", and decrease the speed by 11.
+# Otherwise, have R simply print out "Slow down!", and decrease the speed by 6.
+# If the session keeps timing out and throwing an error, you are probably stuck in an infinite loop! Check the body of
+# your while loop and make sure you are assigning new values to speed.
+
+# Initialize the speed variable
+speed <- 64
+
+# Extend/adapt the while loop
+while (speed > 30) {
+  print(paste("Your speed is", speed))
+  if (speed > 48) {
+    print("Slow down big time!")
+    speed <- speed - 11
+  } else {
+    print("Slow down!")
+    speed <- speed - 6
+  }
+}
+
+# Stop the while loop: break
+# There are some very rare situations in which severe speeding is necessary: what if a hurricane is approaching and you
+# have to get away as quickly as possible? You don't want the driver's assistant sending you speeding notifications in
+# that scenario, right?
+#
+# This seems like a great opportunity to include the break statement in the while loop you've been working on. Remember
+#  that the break statement is a control statement. When R encounters it, the while loop is abandoned completely.
+
+# Initialize the speed variable
+speed <- 88
+
+while (speed > 30) {
+  print(paste("Your speed is", speed))
+
+  # Break the while loop when speed exceeds 80
+  if (speed >80 ) {
+    break
+  }
+
+  if (speed > 48) {
+    print("Slow down big time!")
+    speed <- speed - 11
+  } else {
+    print("Slow down!")
+    speed <- speed - 6
+  }
+}
+
+# Build a while loop from scratch
+# The previous exercises guided you through developing a pretty advanced while loop, containing a break statement and
+# different messages and updates as determined by control flow constructs. If you manage to solve this comprehensive
+# exercise using a while loop, you're totally ready for the next topic: the for loop.
+
+# Initialize i as 1
+i <- 1
+
+# Code the while loop
+while (i <= 10) {
+  print(i * 3)
+  if (((i * 3)%% 8) <= 0  ) {
+    print(i * 3)
+    break
+  }
+  i <- i + 1
+}
