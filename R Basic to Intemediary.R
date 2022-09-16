@@ -378,7 +378,7 @@ while (speed > 30) {
 #  that the break statement is a control statement. When R encounters it, the while loop is abandoned completely.
 
 # Initialize the speed variable
-speed <- 88
+speed <- 79
 
 while (speed > 30) {
   print(paste("Your speed is", speed))
