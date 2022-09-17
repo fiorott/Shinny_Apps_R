@@ -414,3 +414,121 @@ while (i <= 10) {
   }
   i <- i + 1
 }
+
+
+# For loop
+# Iterates over vector or lists (also matrices and data frames)
+# Break - stops the code entirely (any lines next or iterations will not happen)
+# Next - skips the remainder of the code inside the loop and proceeds to the next interation
+# O break para tudo, enquanto o next para tudo que estiver depois dele naequela interação, iniciando a próxima iteração.
+# Abaixo apresentaos duas formas de loop, uma concisa e fácil de ler, e outra que nos permite extrair todas as
+# informações do loop.
+
+cities <- c("New York","Paris", "London", "Tokio", "Rio de Janeiro", "Cape Town")
+# Loop 1 - Concise, easy to read, but no access to looping index
+for (city in cities) {
+  print(city)
+}
+#loop 2 - Harder to read and write, but more versatile
+for(i in 1:length(cities)) {
+  print(cities[i])
+}
+
+#Notar que se estivermos trabalhando com uma lista, é necessário doble brackets para selecionar os elementos
+# (ver loop 2 abaixo em comparação com o loop 2 acima)
+
+primes_list <- list(2, 3, 5, 7, 11, 13)
+
+# loop version 1
+for (p in primes_list) {
+  print(p)
+}
+
+# loop version 2
+for (i in 1:length(primes_list)) {
+  print(primes_list[[i]])
+}
+
+# nested for loop
+
+new_hope <- c(460.998, 314.4)
+empire_strikes <- c(290.475, 247.900)
+return_jedi <- c(309.306, 165.8)
+# Construct matrix
+star_wars_matrix <- matrix(c(new_hope, empire_strikes, return_jedi), nrow = 3, byrow = TRUE)
+star_wars_matrix
+
+# define the double for loop
+for (i in 1:nrow(star_wars_matrix)) {
+  for (j in 1:ncol(star_wars_matrix)) {
+    x = star_wars_matrix[i,j]
+    print(paste("On row", i, "and column", j , "the matrix contains", x))
+
+  }
+}
+
+# COmbinando for com break e next
+
+# Next, you break it
+# A possible solution to the previous exercise has been provided for you. The code loops over the linkedin
+# vector and prints out different messages depending on the values of li.
+#
+# In this exercise, you will use the break and next statements:
+#
+# The break statement abandons the active loop: the remaining code in the loop is skipped and
+# the loop is not iterated over anymore.
+# The next statement skips the remainder of the code in the loop, but continues the iteration.
+
+# The linkedin vector has already been defined for you
+linkedin <- c(16, 9, 13, 5, 2, 17, 14)
+
+# Adapt/extend the for loop
+for (li in linkedin) {
+  if (li > 10) {
+    print("You're popular!")
+  } else {
+    print("Be more visible!")
+  }
+
+  # Add if statement with break
+  if (li > 16) {
+    print("This is ridiculous, I'm outta here!")
+    break
+  }
+
+  # Add if statement with next
+  if (li < 5) {
+    print("This is too embarrassing!")
+    next
+  }
+
+  print(li)
+}
+
+#Build a for loop from scratch
+# This exercise will not introduce any new concepts on for loops.
+#
+# We already went ahead and defined a variable rquote. This variable has been split up into a
+# vector that contains separate letters and has been stored in a vector chars with the strsplit() function.
+#
+# Can you write code that counts the number of r's that come before the first u in rquote?
+
+# Pre-defined variables
+rquote <- "r's internals are irrefutably intriguing"
+chars <- strsplit(rquote, split = "")[[1]]
+
+# Initialize rcount
+rcount <- 0
+
+# Finish the for loop
+for (char in chars) {
+    if (char == "r"){
+    rcount <- rcount + 1
+    }
+    if (char == "u"){
+    break
+    }
+
+# Print out rcount
+print(rcount)
+}
